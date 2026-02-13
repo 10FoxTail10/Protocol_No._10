@@ -5,26 +5,20 @@ public class movement : MonoBehaviour
 {
     [Header("Rotate")]
     [SerializeField] private Transform _head0;
-    [SerializeField] private Transform _head1;
-    [SerializeField] private Transform _head2;
     [SerializeField] private float _sensetivity;
 
     public float speed;
-    public List<Camera> cameras;
-    private int currentCameraIndex = 0;
 
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        EnableCamera(0);
     }
 
     void Update()
     {
         Move();
         Rotate();
-        CameraChange();
     }
 
 
@@ -78,26 +72,5 @@ public class movement : MonoBehaviour
         float rotationX = Input.GetAxis("Mouse Y") * _sensetivity;
         transform.Rotate(0, rotationY, 0);
         _head0.Rotate(-rotationX, 0, 0);
-        _head1.Rotate(-rotationX, 0, 0);
-        _head2.Rotate(-rotationX, 0, 0);
-    }
-
-    private void CameraChange()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            currentCameraIndex++;
-            if (currentCameraIndex >= cameras.Count)
-            {
-                currentCameraIndex = 0;
-            }
-            EnableCamera(currentCameraIndex);
-        }
-    }
-
-    private void EnableCamera(int n)
-    {
-        cameras.ForEach(cam => cam.enabled = false);
-        cameras[n].enabled = true;
     }
 }
