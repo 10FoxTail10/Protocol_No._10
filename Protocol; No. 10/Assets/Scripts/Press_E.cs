@@ -17,7 +17,7 @@ public class Press_E : MonoBehaviour
     private bool isInRange = false; // Флаг близости к объекту
     private bool screenIsActive = true; // Флаг активности экрана телевизора        #Перевести в один файл#
     private float startVolume = 1f; // Базовое значение звука в игре (Значение от 0 (без звука) до 1 (полная громкость))        #Перевести в один файл#
-
+    public GlobalSet globalSet;
     void Start()
     {
         tip.text = ""; // Базовое значение подсказки для игрока в начале игры
@@ -28,6 +28,7 @@ public class Press_E : MonoBehaviour
     {
         ChangeActiveTV(); //Смена активности TV
         CollectObject(); // Сбор предметов 
+        globalSet.assss = 300;
     }
 
     #region Change_Active_TV

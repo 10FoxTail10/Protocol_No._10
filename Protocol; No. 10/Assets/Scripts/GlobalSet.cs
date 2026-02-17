@@ -3,6 +3,12 @@ using TMPro;
 
 public class GlobalSet : MonoBehaviour
 {
+    public int assss = 15;
+
+    void Update()
+    {
+        Debug.Log(assss);
+    }
     //#region Global_Setting
 
     //#endregion
