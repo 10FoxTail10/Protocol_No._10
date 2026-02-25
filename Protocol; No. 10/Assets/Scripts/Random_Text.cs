@@ -1,9 +1,10 @@
-using using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Random_Text : MonoBehaviour
 {
+    // Только в меню используется
     private List<string> texts = new List<string>();
     public TMP_Text text;
 
@@ -23,6 +24,7 @@ public class Random_Text : MonoBehaviour
         texts.Add("12_...сложно его придумывать");
         texts.Add("13) C# и Unity это класная тема");
         texts.Add("14) А ещё Blender");
+        texts.Add("№10");
         texts.Add("20) Я не хочу быть сварщиком, но видимо придёться(");
         texts.Add("Возможно я в одном пункте допустил ошибку)");
         texts.Add("10foxtail10@gmail.com Почта для связи со мной, если не нашли)");
