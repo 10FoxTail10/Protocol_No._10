@@ -751,6 +751,11 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!23 &609409480 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 327599054754824611, guid: 6f68f60ef92ef8e4ba91f62e8dccb300, type: 3}
+  m_PrefabInstance: {fileID: 444649788441320183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &644557447 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7244863506764690946, guid: 9a146f9bda4e7f445b44b0933c3c3cbb, type: 3}
@@ -1875,11 +1880,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!23 &1062901955 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -3285378800646228901, guid: 9a146f9bda4e7f445b44b0933c3c3cbb, type: 3}
-  m_PrefabInstance: {fileID: 770751763}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1119128587 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: 9a146f9bda4e7f445b44b0933c3c3cbb, type: 3}
@@ -2447,8 +2447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Press_E
   tip: {fileID: 734784903}
-  audioTV: {fileID: 1062901954}
-  videoTV: {fileID: 1062901955}
+  audioTV: {fileID: 444649788441320188}
+  videoTV: {fileID: 609409480}
   soundEffect: {fileID: 8300000, guid: ab766ec5f8887aa478c30ec52bbd336c, type: 3}
   Watch: {fileID: 1176534152}
   globalSet: {fileID: 0}

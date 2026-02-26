@@ -5,7 +5,7 @@ public class GlobalSet : MonoBehaviour
 {
     #region Game_Setting
     [Header("Game Setting")]
-    [SerializeField] public float globalVolume = 1f; // Базовое значение звука в игре (Значение от 0 (без звука) до 1 (полная громкость))
+    [SerializeField] public float globalVolume = 1f; // Р‘Р°Р·РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ Р·РІСѓРєР° РІ РёРіСЂРµ (Р—РЅР°С‡РµРЅРёРµ РѕС‚ 0 (Р±РµР· Р·РІСѓРєР°) РґРѕ 1 (РїРѕР»РЅР°СЏ РіСЂРѕРјРєРѕСЃС‚СЊ))
     [SerializeField] public float musicVolume = 1f;
     [SerializeField] public float effectVolume = 1f;
 
@@ -14,7 +14,7 @@ public class GlobalSet : MonoBehaviour
     #region Player_Setting
     [Header("Player Setting")]
     [SerializeField] public float sensetivity;
-    [SerializeField] public bool isInRange = false; // Флаг близости к объекту
+    [SerializeField] public bool isInRange = false; // Р¤Р»Р°Рі Р±Р»РёР·РѕСЃС‚Рё Рє РѕР±СЉРµРєС‚Сѓ
 
     #endregion
 

@@ -7,27 +7,27 @@ using TMPro;
 
 public class Press_E : MonoBehaviour
 {
-    public TMP_Text tip;   // UI текст, куда выводится подсказка        #Перевести в один файл#
-    public AudioSource audioTV; // Аудио плеер телевизора
-    public MeshRenderer videoTV; // Mesh объект телевизора
-    public AudioClip soundEffect; // Звуковой эффект подбора вещей
+    public TMP_Text tip;   // UI С‚РµРєСЃС‚, РєСѓРґР° РІС‹РІРѕРґРёС‚СЃСЏ РїРѕРґСЃРєР°Р·РєР°        #РџРµСЂРµРІРµСЃС‚Рё РІ РѕРґРёРЅ С„Р°Р№Р»#
+    public AudioSource audioTV; // РђСѓРґРёРѕ РїР»РµРµСЂ С‚РµР»РµРІРёР·РѕСЂР°
+    public MeshRenderer videoTV; // Mesh РѕР±СЉРµРєС‚ С‚РµР»РµРІРёР·РѕСЂР°
+    public AudioClip soundEffect; // Р—РІСѓРєРѕРІРѕР№ СЌС„С„РµРєС‚ РїРѕРґР±РѕСЂР° РІРµС‰РµР№
     public GameObject Watch;
 
-    private bool isInRangeTV = false; // Флаг близости к TV
-    private bool isInRange = false; // Флаг близости к объекту
-    private bool screenIsActive = true; // Флаг активности экрана телевизора        #Перевести в один файл#
-    private float startVolume = 1f; // Базовое значение звука в игре (Значение от 0 (без звука) до 1 (полная громкость))        #Перевести в один файл#
+    private bool isInRangeTV = false; // Р¤Р»Р°Рі Р±Р»РёР·РѕСЃС‚Рё Рє TV
+    private bool isInRange = false; // Р¤Р»Р°Рі Р±Р»РёР·РѕСЃС‚Рё Рє РѕР±СЉРµРєС‚Сѓ
+    private bool screenIsActive = true; // Р¤Р»Р°Рі Р°РєС‚РёРІРЅРѕСЃС‚Рё СЌРєСЂР°РЅР° С‚РµР»РµРІРёР·РѕСЂР°        #РџРµСЂРµРІРµСЃС‚Рё РІ РѕРґРёРЅ С„Р°Р№Р»#
+    private float startVolume = 1f; // Р‘Р°Р·РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ Р·РІСѓРєР° РІ РёРіСЂРµ (Р—РЅР°С‡РµРЅРёРµ РѕС‚ 0 (Р±РµР· Р·РІСѓРєР°) РґРѕ 1 (РїРѕР»РЅР°СЏ РіСЂРѕРјРєРѕСЃС‚СЊ))        #РџРµСЂРµРІРµСЃС‚Рё РІ РѕРґРёРЅ С„Р°Р№Р»#
     public GlobalSet globalSet;
     void Start()
     {
-        tip.text = ""; // Базовое значение подсказки для игрока в начале игры
-        audioTV.volume = startVolume; // Изменение на базовое значение звука
-    }       //#Перевести в один файл#
+        tip.text = ""; // Р‘Р°Р·РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РёРіСЂРѕРєР° РІ РЅР°С‡Р°Р»Рµ РёРіСЂС‹
+        audioTV.volume = startVolume; // РР·РјРµРЅРµРЅРёРµ РЅР° Р±Р°Р·РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ Р·РІСѓРєР°
+    }       //#РџРµСЂРµРІРµСЃС‚Рё РІ РѕРґРёРЅ С„Р°Р№Р»#
 
     void Update()
     {
-        ChangeActiveTV(); //Смена активности TV
-        CollectObject(); // Сбор предметов 
+        ChangeActiveTV(); //РЎРјРµРЅР° Р°РєС‚РёРІРЅРѕСЃС‚Рё TV
+        CollectObject(); // РЎР±РѕСЂ РїСЂРµРґРјРµС‚РѕРІ 
         globalSet.assss = 300;
     }
 
@@ -36,7 +36,7 @@ public class Press_E : MonoBehaviour
     {
         if (isInRangeTV && screenIsActive)
         {
-            tip.text = "Нажмите 'E', чтобы выключить";
+            tip.text = "РќР°Р¶РјРёС‚Рµ 'E', С‡С‚РѕР±С‹ РІС‹РєР»СЋС‡РёС‚СЊ";
             if (Input.GetKeyDown(KeyCode.E) && screenIsActive)
             {
                 TurnOffTV();
@@ -45,7 +45,7 @@ public class Press_E : MonoBehaviour
         }
         else if (isInRangeTV)
         {
-            tip.text = "Нажмите 'E', чтобы включить";
+            tip.text = "РќР°Р¶РјРёС‚Рµ 'E', С‡С‚РѕР±С‹ РІРєР»СЋС‡РёС‚СЊ";
             if (Input.GetKeyDown(KeyCode.E))
             {
                 TurnOnTV();
@@ -54,7 +54,7 @@ public class Press_E : MonoBehaviour
         }
         else if (!isInRangeTV && !isInRange)
         {
-            tip.text = ""; // Пустое собщение, чтобы не мешалось на экране)
+            tip.text = ""; // РџСѓСЃС‚РѕРµ СЃРѕР±С‰РµРЅРёРµ, С‡С‚РѕР±С‹ РЅРµ РјРµС€Р°Р»РѕСЃСЊ РЅР° СЌРєСЂР°РЅРµ)
         }
     }
 
@@ -76,7 +76,7 @@ public class Press_E : MonoBehaviour
     {
         if (isInRange && Watch != null)
         {
-            tip.text = "Нажмите 'E'";
+            tip.text = "РќР°Р¶РјРёС‚Рµ 'E'";
             if (Input.GetKeyDown(KeyCode.E))
             {
                 CollectWatch();
@@ -117,4 +117,3 @@ public class Press_E : MonoBehaviour
     }
     #endregion
 }
-

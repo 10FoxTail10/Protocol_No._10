@@ -17,12 +17,12 @@ public class Hide : MonoBehaviour
         if (isVisible == true)
         {
             isVisible = false;
-            panel.SetActive(isVisible);   // Переключаем активность целевого объекта
+            panel.SetActive(isVisible);   // РџРµСЂРµРєР»СЋС‡Р°РµРј Р°РєС‚РёРІРЅРѕСЃС‚СЊ С†РµР»РµРІРѕРіРѕ РѕР±СЉРµРєС‚Р°
         }
         else
         {
             isVisible = true;
-            panel.SetActive(isVisible);   // Переключаем активность целевого объекта
+            panel.SetActive(isVisible);   // РџРµСЂРµРєР»СЋС‡Р°РµРј Р°РєС‚РёРІРЅРѕСЃС‚СЊ С†РµР»РµРІРѕРіРѕ РѕР±СЉРµРєС‚Р°
         }
     }
 }
