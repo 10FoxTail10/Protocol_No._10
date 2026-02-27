@@ -22,7 +22,6 @@ public class GlobalSet : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(assss);
     }
 
     //#region HotKey_Setting

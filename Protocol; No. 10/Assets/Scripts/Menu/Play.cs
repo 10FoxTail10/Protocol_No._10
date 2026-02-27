@@ -5,6 +5,6 @@ public class Play : MonoBehaviour
 {
     public void Play_Game()
     {
-        Application.LoadLevel(1);
+        SceneManager.LoadScene(1);
     }
 }

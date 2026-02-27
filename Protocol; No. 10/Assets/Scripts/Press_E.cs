@@ -12,6 +12,7 @@ public class Press_E : MonoBehaviour
     public MeshRenderer videoTV; // Mesh объект телевизора
     public AudioClip soundEffect; // Звуковой эффект подбора вещей
     public GameObject Watch;
+    public GameObject Screen;
 
     private bool isInRangeTV = false; // Флаг близости к TV
     private bool isInRange = false; // Флаг близости к объекту
@@ -28,7 +29,6 @@ public class Press_E : MonoBehaviour
     {
         ChangeActiveTV(); //Смена активности TV
         CollectObject(); // Сбор предметов 
-        globalSet.assss = 300;
     }
 
     #region Change_Active_TV
@@ -62,12 +62,14 @@ public class Press_E : MonoBehaviour
     {
         audioTV.volume = 0;
         videoTV.enabled = false;
+        Screen.SetActive(true);
     }
 
     private void TurnOnTV()
     {
         audioTV.volume = startVolume;
         videoTV.enabled = true;
+        Screen.SetActive(false);
     }
     #endregion
 
