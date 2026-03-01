@@ -34,7 +34,9 @@ public class Random_Text : MonoBehaviour
 
         int randomIndex = Random.Range(0, texts.Count);
 
-        menuText[0].startText = texts[randomIndex];
-        menuText[1].startText = texts[randomIndex];
+        for (int i = 0; i < menuText.Count; i++)
+        {
+            menuText[i].startText = texts[randomIndex];
+        }
     }
 }

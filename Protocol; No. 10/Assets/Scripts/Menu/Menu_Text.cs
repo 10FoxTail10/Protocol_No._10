@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Serialization;
 
-// Компонент для хранения состояний текста кнопки
+
 [System.Serializable]
 public struct ButtonState
 {
