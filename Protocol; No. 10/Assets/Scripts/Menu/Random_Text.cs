@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Random_Text : MonoBehaviour
 {
-    #region Random
-
+    [Header("Random text")]
     [SerializeField] public List<Menu_Text> menuText;
-    private List<string> texts = new List<string>();
 
-    #endregion
+    private List<string> texts = new List<string>();
 
     void Start()
     {
@@ -32,11 +30,11 @@ public class Random_Text : MonoBehaviour
         texts.Add("Возможно я в одном пункте допустил ошибку)");
         texts.Add("10foxtail10@gmail.com Почта для связи со мной, если не нашли)");
 
-        int randomIndex = Random.Range(0, texts.Count);
+        int rndIndex = Random.Range(0, texts.Count);
 
         for (int i = 0; i < menuText.Count; i++)
         {
-            menuText[i].startText = texts[randomIndex];
+            menuText[i].startText = texts[rndIndex];
         }
     }
 }
