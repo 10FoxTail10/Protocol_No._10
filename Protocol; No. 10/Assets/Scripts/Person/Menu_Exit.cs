@@ -7,6 +7,7 @@ public class Menu_Exit : MonoBehaviour
     [SerializeField] public GameObject menuIsVis;
     [SerializeField] public GameObject menuIsNotVis;
     [SerializeField] public GameObject pause;
+    [SerializeField] public Volume_Music audioAll;
     private bool _isActive = false;
 
     void Update()
@@ -23,6 +24,7 @@ public class Menu_Exit : MonoBehaviour
             pause.SetActive(true);
             _isActive = false;
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -31,6 +33,7 @@ public class Menu_Exit : MonoBehaviour
             pause.SetActive(false);
             _isActive = true;
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

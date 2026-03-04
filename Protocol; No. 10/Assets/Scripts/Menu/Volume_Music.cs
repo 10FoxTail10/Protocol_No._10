@@ -26,9 +26,8 @@ public class Volume_Music : MonoBehaviour
     void Start()
     {
         Load();
-        ValueMusic();
+        InvokeRepeating("ValueMusic", 0f, 0f);
     }
-
 
     public void SliderMusic()
     {
@@ -47,8 +46,8 @@ public class Volume_Music : MonoBehaviour
         if (toggleGVolume.isOn == true)
         {
             _globalVolume = sliderGVolume.value;
-            _volumeMusic = sliderVMusic.value;
-            _volumeSound = sliderVSound.value;
+            _volumeMusic = _globalVolume * sliderVMusic.value;
+            _volumeSound = _globalVolume * sliderVSound.value;
         }
         else
         {
