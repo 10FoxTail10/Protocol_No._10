@@ -7648,7 +7648,7 @@ GameObject:
   - component: {fileID: 1772312991}
   - component: {fileID: 1772312990}
   - component: {fileID: 1772312989}
-  - component: {fileID: 1772312988}
+  - component: {fileID: 1772312995}
   - component: {fileID: 1772312993}
   - component: {fileID: 1772312987}
   - component: {fileID: 1772312994}
@@ -7667,9 +7667,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772312986}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 10
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -7686,21 +7686,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1772312988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772312986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86e629fb3fdc7aa4c8fbe09c43478b65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::movement
-  _head0: {fileID: 492255927}
-  _sensetivity: 2
-  speed: 3
 --- !u!136 &1772312989
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7789,7 +7774,7 @@ Transform:
   m_GameObject: {fileID: 1772312986}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.05, y: -10.36, z: -9.733}
+  m_LocalPosition: {x: 2.12, y: -2.44, z: 5.78}
   m_LocalScale: {x: 0.5814585, y: 1.0303124, z: 0.35580632}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7836,6 +7821,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9999999, y: 0.78458554, z: 0.9999999}
   m_Center: {x: -0, y: 0.60770714, z: -0}
+--- !u!114 &1772312995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772312986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea60a29e5ee94d740abb5bf8d9b089d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControl
+  speed: 1
+  rb: {fileID: 1772312987}
+  _head: {fileID: 492255927}
 --- !u!1 &1778964431
 GameObject:
   m_ObjectHideFlags: 0
