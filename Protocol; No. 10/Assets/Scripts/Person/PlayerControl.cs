@@ -1,20 +1,39 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+// работает через Rigidbody, для прыжка нужна поверхность с маской, а у персонажа в самой нижней части пустышка
+
 public class PlayerControl : MonoBehaviour
 {
-    [Header("Rotate")]
-    [SerializeField] public float speed = 1f;
-    [SerializeField] public Rigidbody rb;
+    #region Переменные
+    [Header("Camera")]
     [SerializeField] public Transform _head;
-    
+    [SerializeField] public float _sensetivity = 2f;
+
+    private float xRot = 0f;
+    private float _maxAng = 80f;
+    private float _minAng = -60f;
+
+    [Header("Move")]
+    [SerializeField] public float speed;
+    [SerializeField] public float speedX; // Множитель скорости персонажа
+    [SerializeField] public float jumpSpeed;
+    [SerializeField] public Rigidbody rb;
+
     private float _horizontal;
     private float _vertical;
-    private float _sensetivity = 2f; // Настройки чувствительности
+    private float _speed;
+    private Vector3 _move;
+
+    [Header("Jump")]
+    [SerializeField] public Transform feetTransform;
+    [SerializeField] public LayerMask floorMask;
+    #endregion
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        _speed = speed;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -22,63 +41,58 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         Move();
+        Run();
+        Jump();
         Rotate();
     }
 
 
     public void Move()
     {
-        _horizontal =  Input.GetAxis("Horizontal");
+        _horizontal = Input.GetAxis("Horizontal");
         _vertical = Input.GetAxis("Vertical");
-        rb.AddForce(((transform.right * _horizontal) + (transform.forward * _vertical)) * speed);
-        
-        /*bool forward = Input.GetKey(KeyCode.W);
-        bool back = Input.GetKey(KeyCode.S);
-        bool right = Input.GetKey(KeyCode.D);
-        bool left = Input.GetKey(KeyCode.A);
-        bool rightDiag = Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D);
-        bool leftDiag = Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A);
-        bool rightDiagBack = Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D);
-        bool leftDiagBack = Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A);
-        if (rightDiag)
+
+        _move = new Vector3(_horizontal, 0f, _vertical);
+
+        Vector3 MoveVec = transform.TransformDirection(_move) * speed;
+        rb.linearVelocity = new Vector3(MoveVec.x, rb.linearVelocity.y, MoveVec.z);
+    }
+
+    public void Run()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && speed < _speed * speedX)
         {
-            transform.position += transform.forward * Time.deltaTime * speed + transform.right * Time.deltaTime * speed;
+            speed *= speedX;
         }
-        else if (leftDiag)
+        else if (!Input.GetKey(KeyCode.LeftShift))
         {
-            transform.position += transform.forward * Time.deltaTime * speed + -transform.right * Time.deltaTime * speed;
+            speed = _speed;
         }
-        else if (rightDiagBack)
+    }
+    
+    public void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
         {
-            transform.position += -transform.forward * Time.deltaTime * speed + transform.right * Time.deltaTime * speed;
+            if (Physics.CheckSphere(feetTransform.position, 0.1f, floorMask))
+            {
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            }
         }
-        else if (leftDiagBack)
-        {
-            transform.position += -transform.forward * Time.deltaTime * speed + -transform.right * Time.deltaTime * speed;
-        }
-        else if (forward)
-        {
-            transform.position += transform.forward * Time.deltaTime * speed;
-        }
-        else if (back)
-        {
-            transform.position += -transform.forward * Time.deltaTime * speed;
-        }
-        else if (right)
-        {
-            transform.position += transform.right * Time.deltaTime * speed;
-        }
-        else if (left)
-        {
-            transform.position += -transform.right * Time.deltaTime * speed;
-        }*/
     }
 
     private void Rotate()
     {
-        float rotationY = Input.GetAxis("Mouse X") * _sensetivity;
-        float rotationX = Input.GetAxis("Mouse Y") * _sensetivity;
-        transform.Rotate(0, rotationY, 0);
-        _head.Rotate(-rotationX, 0, 0);
+        float rotationY = Input.GetAxis("Mouse X") * _sensetivity; //(крутим мышкой влево-вправо)
+        float rotationX = Input.GetAxis("Mouse Y") * _sensetivity; //(крутим мышкой вверх-вниз)
+
+        xRot -= rotationX;
+        xRot = Mathf.Clamp(xRot, _minAng, _maxAng); // Огранка по повороту камеры в вертикаль
+
+        Quaternion yRotation = Quaternion.AngleAxis(rotationY, Vector3.up);           // Горизонт
+        Quaternion xRotation = Quaternion.AngleAxis(xRot, Vector3.right);          // Вертикаль
+
+        transform.rotation *= yRotation;
+        _head.localRotation = xRotation;
     }
 }
