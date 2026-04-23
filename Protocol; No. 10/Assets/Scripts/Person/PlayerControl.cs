@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerControl : MonoBehaviour
 {
-    #region Переменные
+    #region Variables
     [Header("Camera")]
     [SerializeField] public Transform _head;
     [SerializeField] public float _sensetivity = 2f;
@@ -45,7 +45,6 @@ public class PlayerControl : MonoBehaviour
         Jump();
         Rotate();
     }
-
 
     public void Move()
     {

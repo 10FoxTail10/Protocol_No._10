@@ -4,10 +4,14 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Screen
   - Watch
   - Ground
   - ExitLV
+  - Interactive
+  - Item
+  - Door
+  - Mechanism
+  - Seat
   layers:
   - Default
   - TransparentFX

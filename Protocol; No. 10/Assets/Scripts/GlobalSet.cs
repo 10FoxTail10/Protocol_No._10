@@ -3,7 +3,7 @@ using TMPro;
 
 public class GlobalSet : MonoBehaviour
 {
-    #region Game_Setting
+    #region Game Setting
     [Header("Game Setting")]
     [SerializeField] public float globalVolume = 1f; // Базовое значение звука в игре (Значение от 0 (без звука) до 1 (полная громкость))
     [SerializeField] public float musicVolume = 1f;
@@ -11,24 +11,31 @@ public class GlobalSet : MonoBehaviour
 
     #endregion
 
-    #region Player_Setting
+    #region Player Setting
     [Header("Player Setting")]
     [SerializeField] public float sensetivity;
     [SerializeField] public bool isInRange = false; // Флаг близости к объекту
 
     #endregion
 
-    public int assss = 15;
+    #region Global Variables
+    [Header("UI")]
+    [SerializeField] public TMP_Text tips;
 
-    void Update()
-    {
-    }
+    #endregion
 
-    //#region HotKey_Setting
+    #region HotKey Setting
 
-    //#endregion
+    #endregion
 
     void Start()
     {
+        tips.text = ""; // Базовое значение подсказки для игрока в начале игры
     }
+
+    void Update()
+    {
+
+    }
+
 }

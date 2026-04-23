@@ -8,26 +8,50 @@ using UnityEngine.SceneManagement;
 
 public class Press_E : MonoBehaviour
 {
-    public TMP_Text tip;   // UI текст, куда выводится подсказка        #Перевести в один файл#
-    public AudioSource audioTV; // Аудио плеер телевизора
-    public MeshRenderer videoTV; // Mesh объект телевизора
-    public AudioClip soundEffect; // Звуковой эффект подбора вещей
-    public GameObject Watch;
-    public GameObject Screen;
+    #region Variables
+    [Header("Scripts")] // Другие скрипты
+    [SerializeField] private GlobalSet _globalSet; // Скрипт с глобальными переменными
 
-    private bool _isInRangeTV = false; // Флаг близости к TV
-    private bool _isInRange = false; // Флаг близости к объекту
-    private bool _screenIsActive = true; // Флаг активности экрана телевизора        #Перевести в один файл#
+    [Header("Door")]
+    [SerializeField] private DoorController _currentDoor; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+
+    [Header("TV")]
+    [SerializeField] public AudioSource audioTV; // Аудио телевизора
+    [SerializeField] public MeshRenderer videoTV; // Mesh экрана телевизора (для отображения видео)
+    [SerializeField] public GameObject screenOff;
+    [SerializeField] public GameObject led;
+    [SerializeField] public Material ledMaterialOn;
+    [SerializeField] public Material ledMaterialOff;
+    [SerializeField] public MeshRenderer ledMesh;
+    [SerializeField] private bool _tvIsStatus; // Статус телевизора (вкл/выкл)
+
+    [Header("Item")]
+    [SerializeField] public AudioClip soundEffect; // Звуковой эффект подбора вещей
+
+    [Header("Raycast")]
+    [SerializeField] private float _distance = 1f;
+
+    //private Ray _ray = new Ray(transform.position, transform.forward);
+    public RaycastHit _hit;
+
+    [Header("Seat")]
+    [SerializeField] public GameObject person;
+    [SerializeField] public GameObject seatPerson;
+
+    [Header("Next Level")]
+    [SerializeField] private int _sceneIndex;
+
+    [Header("Private")]
+    private TMP_Text _tips;
+    #endregion
+
     private float _startVolume = 1f; // Базовое значение звука в игре (Значение от 0 (без звука) до 1 (полная громкость))        #Перевести в один файл#
-   
-    private int _sceneIndex;
-    private bool _isExitRange = false;
 
-    public GlobalSet globalSet;
 
     void Start()
     {
-        tip.text = ""; // Базовое значение подсказки для игрока в начале игры
+        _tips = _globalSet.tips;
+        ledMesh = led.GetComponent<MeshRenderer>();
         audioTV.volume = _startVolume; // Изменение на базовое значение звука
         _sceneIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log("Номер сцены" + _sceneIndex);
@@ -35,74 +59,93 @@ public class Press_E : MonoBehaviour
 
     void Update()
     {
-        ChangeActiveTV(); //Смена активности TV
-        CollectObject(); // Сбор предметов 
-        Next(); // Переход на следующий уровень
+        Raycast();
     }
 
-    #region Change_Active_TV
+    #region Raycast
+    private void Raycast()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out _hit, _distance))
+        {
+            if (_hit.collider.CompareTag("Door"))
+            {
+                Door(); // Открытие закрытие двери
+            }
+            ChangeActiveTV(); // Смена активности TV
+            CollectObject(); // Сбор предметов 
+            Seat(); // Сесть
+            Next(); // Переход на следующий уровень
+        }
+        else
+        {
+            _tips.text = "";
+        }
+    }
+    #endregion
+
+    #region Door
+    private void Door()
+    {
+        if (_hit.collider.CompareTag("Door"))
+        {
+            _currentDoor = _hit.collider.GetComponent<DoorController>();
+            _currentDoor.ChangeStatusDoor();
+        }
+        else
+        {
+            _currentDoor = null;
+        }
+    }
+
+    #endregion
+
+    #region TV
     private void ChangeActiveTV()
     {
-        if (_isInRangeTV && _screenIsActive)
+        if (_hit.collider.CompareTag("Mechanism") && !_tvIsStatus)
         {
-            tip.text = "Нажмите 'E', чтобы выключить";
-            if (Input.GetKeyDown(KeyCode.E) && _screenIsActive)
-            {
-                TurnOffTV();
-                _screenIsActive = false;
-            }
-        }
-        else if (_isInRangeTV)
-        {
-            tip.text = "Нажмите 'E', чтобы включить";
+            _tips.text = "Нажмите 'E', чтобы включить";
             if (Input.GetKeyDown(KeyCode.E))
             {
                 TurnOnTV();
-                _screenIsActive = true;
+                _tvIsStatus = true;
+                ledMesh.material = ledMaterialOn;
             }
         }
-        else if (!_isInRangeTV && !_isInRange && !_isExitRange)
+        else if (_hit.collider.CompareTag("Mechanism") && _tvIsStatus)
         {
-            tip.text = ""; // Пустое собщение, чтобы не мешалось на экране)
+            _tips.text = "Нажмите 'E', чтобы выключить";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                TurnOffTV();
+                _tvIsStatus = false;
+                ledMesh.material = ledMaterialOff;
+            }
         }
-    }
-
-    private void TurnOffTV()
-    {
-        audioTV.volume = 0;
-        videoTV.enabled = false;
-        Screen.SetActive(true);
     }
 
     private void TurnOnTV()
     {
         audioTV.volume = _startVolume;
         videoTV.enabled = true;
-        Screen.SetActive(false);
+        screenOff.SetActive(false);
     }
-    #endregion
 
-    #region Exit Next Level
-
-    public void Next()
+    private void TurnOffTV()
     {
-        if (_isExitRange)
-        {
-            tip.text = "Нажмите 'E'";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                SceneManager.LoadScene(_sceneIndex + 1);
-            }
-        }
+        audioTV.volume = 0;
+        videoTV.enabled = false;
+        screenOff.SetActive(true);
     }
+
     #endregion
 
-    #region Collect
+    #region Items
     private void CollectObject()
     {
-        if (_isInRange && Watch != null)
+        if (_hit.collider.CompareTag("Item"))
         {
-            tip.text = "Нажмите 'E'";
+            _tips.text = "Нажмите 'E', чтобы подобрать";
             if (Input.GetKeyDown(KeyCode.E))
             {
                 CollectWatch();
@@ -112,42 +155,40 @@ public class Press_E : MonoBehaviour
 
     private void CollectWatch()
     {
-        Destroy(Watch);
+        Destroy(_hit.collider.gameObject);
         AudioSource.PlayClipAtPoint(soundEffect, transform.position);
+        _tips.text = "";
     }
     #endregion
 
-    #region TriggerTag
-    private void OnTriggerEnter(Collider other)
+    #region Seat
+    private void Seat()
     {
-        if (other.CompareTag("Screen"))
+        if (_hit.collider.CompareTag("Seat"))
         {
-            _isInRangeTV = true;
-        }
-        if (other.CompareTag("Watch"))
-        {
-            _isInRange = true;
-        }
-        if (other.CompareTag("ExitLV"))
-        {
-            _isExitRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Screen"))
-        {
-            _isInRangeTV = false;
-        }
-        if (other.CompareTag("Watch"))
-        {
-            _isInRange = false;
-        }
-        if (other.CompareTag("ExitLV"))
-        {
-            _isExitRange = false;
+            _tips.text = "Нажмите 'E', чтобы сесть";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                seatPerson.SetActive(true);
+                person.SetActive(false);
+            }
         }
     }
     #endregion
+
+    #region Exit Next Level
+
+    public void Next()
+    {
+        if (false)
+        {
+            _tips.text = "Нажмите 'E'";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                SceneManager.LoadScene(_sceneIndex + 1);
+            }
+        }
+    }
+    #endregion
+
 }
