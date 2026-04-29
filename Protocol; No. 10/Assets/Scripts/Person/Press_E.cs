@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -14,6 +12,7 @@ public class Press_E : MonoBehaviour
 
     [Header("Door")]
     [SerializeField] private DoorController _currentDoor; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+    [SerializeField] private ExitDoorController _currentExitDoor; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
 
     [Header("TV")]
     [SerializeField] public AudioSource audioTV; // Аудио телевизора
@@ -38,9 +37,6 @@ public class Press_E : MonoBehaviour
     [SerializeField] public GameObject person;
     [SerializeField] public GameObject seatPerson;
 
-    [Header("Next Level")]
-    [SerializeField] private int _sceneIndex;
-
     [Header("Private")]
     private TMP_Text _tips;
     #endregion
@@ -53,8 +49,6 @@ public class Press_E : MonoBehaviour
         _tips = _globalSet.tips;
         ledMesh = led.GetComponent<MeshRenderer>();
         audioTV.volume = _startVolume; // Изменение на базовое значение звука
-        _sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("Номер сцены" + _sceneIndex);
     }       //#Перевести в один файл#
 
     void Update()
@@ -74,7 +68,6 @@ public class Press_E : MonoBehaviour
             ChangeActiveTV(); // Смена активности TV
             CollectObject(); // Сбор предметов 
             Seat(); // Сесть
-            Next(); // Переход на следующий уровень
         }
         else
         {
@@ -90,6 +83,11 @@ public class Press_E : MonoBehaviour
         {
             _currentDoor = _hit.collider.GetComponent<DoorController>();
             _currentDoor.ChangeStatusDoor();
+        }
+        else if (_hit.collider.CompareTag("Exit"))
+        {
+            _currentExitDoor = _hit.collider.GetComponent<ExitDoorController>();
+            _currentExitDoor.NextLV();
         }
         else
         {
@@ -171,21 +169,6 @@ public class Press_E : MonoBehaviour
             {
                 seatPerson.SetActive(true);
                 person.SetActive(false);
-            }
-        }
-    }
-    #endregion
-
-    #region Exit Next Level
-
-    public void Next()
-    {
-        if (false)
-        {
-            _tips.text = "Нажмите 'E'";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                SceneManager.LoadScene(_sceneIndex + 1);
             }
         }
     }

@@ -12,6 +12,7 @@ TagManager:
   - Door
   - Mechanism
   - Seat
+  - Exit
   layers:
   - Default
   - TransparentFX
