@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Hide_panel : MonoBehaviour
+public class HidePanel : MonoBehaviour
 {
     [Header("Is Visible")]
     [SerializeField] public GameObject panelIsVisidle;

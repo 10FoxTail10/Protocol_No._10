@@ -6,7 +6,7 @@ using TMPro;
 public class CameraControl : MonoBehaviour
 {
     [Header("Scripts")] // Другие скрипты
-    [SerializeField] private GlobalSet _globalSet; // Скрипт с глобальными переменными
+    [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
 
     [Header("Camera")]
     [SerializeField] public Transform head;
@@ -24,7 +24,7 @@ public class CameraControl : MonoBehaviour
 
     void Start()
     {
-        _tips = _globalSet.tips;
+        _tips = _globalSetting.tips;
     }
 
     void Update()

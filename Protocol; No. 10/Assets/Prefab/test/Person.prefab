@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 4517614397561150566}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.94522667, z: -0, w: 0.32641467}
-  m_LocalPosition: {x: 4.757, y: -3.0628564, z: 4.372}
+  m_LocalPosition: {x: 4.79, y: -2.25, z: 4.85}
   m_LocalScale: {x: 0.45355392, y: 0.80367243, z: 0.27753887}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 751412579513376645}
   - component: {fileID: 8605471654680057450}
   - component: {fileID: 3134577399974242507}
-  - component: {fileID: 1091038932571907880}
+  - component: {fileID: 946317100266307018}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -388,7 +388,7 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &1091038932571907880
+--- !u!114 &946317100266307018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,11 +397,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7658007392773986896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30743b8b2fa99e6408acddeb46a77ac8, type: 3}
+  m_Script: {fileID: 11500000, guid: ad1a6c9dba38a204aa531c018bf8b0e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Press_E
-  _globalSet: {fileID: 0}
-  _currentDoor: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PressE
+  _globalSetting: {fileID: 0}
+  _doorController: {fileID: 0}
+  _exitDoorController: {fileID: 0}
   audioTV: {fileID: 0}
   videoTV: {fileID: 0}
   screenOff: {fileID: 0}
@@ -410,8 +411,7 @@ MonoBehaviour:
   ledMaterialOff: {fileID: 2100000, guid: 940864f5a7dd3004696c5e62c2770326, type: 2}
   ledMesh: {fileID: 0}
   _tvIsStatus: 1
-  soundEffect: {fileID: 8300000, guid: ab766ec5f8887aa478c30ec52bbd336c, type: 3}
-  _distance: 3
+  _pickupItem: {fileID: 0}
+  _distance: 4
   person: {fileID: 4517614397561150566}
   seatPerson: {fileID: 0}
-  _sceneIndex: 0

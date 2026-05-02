@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Menu_Exit : MonoBehaviour
+public class MenuExit : MonoBehaviour
 {
     [Header("Menu")]
     [SerializeField] public GameObject menuIsVis;
     [SerializeField] public GameObject menuIsNotVis;
     [SerializeField] public GameObject pause;
-    [SerializeField] public Volume_Music audioAll;
-    private bool _isActive = false;
+    [SerializeField] public VolumeMusic audioAll;
+
+    [Header("Private")]
+    [SerializeField] private bool _isActive = false;
 
     void Update()
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class GlobalSet : MonoBehaviour
+public class GlobalSetting : MonoBehaviour
 {
     #region Game Setting
     [Header("Game Setting")]

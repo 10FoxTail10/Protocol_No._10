@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class JSONControler : MonoBehaviour
+public class JSONController : MonoBehaviour
 {
     [Header("Game Setting")]
     [SerializeField] public Item item;

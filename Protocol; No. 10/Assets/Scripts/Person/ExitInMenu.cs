@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Exit_In_Menu : MonoBehaviour
+public class ExitInMenu : MonoBehaviour
 {
     public void OnMenu()
     {

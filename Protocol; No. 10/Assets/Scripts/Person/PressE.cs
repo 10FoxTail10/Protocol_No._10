@@ -1,18 +1,18 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using TMPro;
-using UnityEngine.SceneManagement;
 
-public class Press_E : MonoBehaviour
+public class PressE : MonoBehaviour
 {
     #region Variables
     [Header("Scripts")] // Другие скрипты
-    [SerializeField] private GlobalSet _globalSet; // Скрипт с глобальными переменными
+    [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
 
     [Header("Door")]
-    [SerializeField] private DoorController _currentDoor; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
-    [SerializeField] private ExitDoorController _currentExitDoor; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+    [SerializeField] private DoorController _doorController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+    [SerializeField] private ExitDoorController _exitDoorController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
 
     [Header("TV")]
     [SerializeField] public AudioSource audioTV; // Аудио телевизора
@@ -22,16 +22,15 @@ public class Press_E : MonoBehaviour
     [SerializeField] public Material ledMaterialOn;
     [SerializeField] public Material ledMaterialOff;
     [SerializeField] public MeshRenderer ledMesh;
-    [SerializeField] private bool _tvIsStatus; // Статус телевизора (вкл/выкл)
+    [SerializeField] private bool _tvIsStatus = true; // Статус телевизора (вкл/выкл)
 
     [Header("Item")]
-    [SerializeField] public AudioClip soundEffect; // Звуковой эффект подбора вещей
+    [SerializeField] private PickupItem _pickupItem; // Скрипт с подбором предметов (ставится автоматом дальше по коду)
 
     [Header("Raycast")]
-    [SerializeField] private float _distance = 1f;
-
-    //private Ray _ray = new Ray(transform.position, transform.forward);
-    public RaycastHit _hit;
+    [SerializeField] public RaycastHit _hit;
+    [SerializeField] private float _distance = 3f;
+    public Ray ray;
 
     [Header("Seat")]
     [SerializeField] public GameObject person;
@@ -46,7 +45,7 @@ public class Press_E : MonoBehaviour
 
     void Start()
     {
-        _tips = _globalSet.tips;
+        _tips = _globalSetting.tips;
         ledMesh = led.GetComponent<MeshRenderer>();
         audioTV.volume = _startVolume; // Изменение на базовое значение звука
     }       //#Перевести в один файл#
@@ -54,20 +53,28 @@ public class Press_E : MonoBehaviour
     void Update()
     {
         Raycast();
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
     }
 
     #region Raycast
-    private void Raycast()
+    public void Raycast()
     {
         if (Physics.Raycast(transform.position, transform.forward, out _hit, _distance))
         {
-            if (_hit.collider.CompareTag("Door"))
+            Door(); // Открытие закрытие двери
+            if (_hit.collider.CompareTag("Mechanism"))
             {
-                Door(); // Открытие закрытие двери
+                ChangeActiveMechanism(); // Смена активности TV
             }
-            ChangeActiveTV(); // Смена активности TV
-            CollectObject(); // Сбор предметов 
-            Seat(); // Сесть
+            else if (_hit.collider.CompareTag("Item"))
+            {
+                CollectObject(); // Сбор предметов 
+            }
+            else if (_hit.collider.CompareTag("Seat"))
+            {
+                Seat(); // Сесть
+            }
         }
         else
         {
@@ -77,30 +84,31 @@ public class Press_E : MonoBehaviour
     #endregion
 
     #region Door
-    private void Door()
+    public void Door()
     {
         if (_hit.collider.CompareTag("Door"))
         {
-            _currentDoor = _hit.collider.GetComponent<DoorController>();
-            _currentDoor.ChangeStatusDoor();
+            _doorController = _hit.collider.GetComponent<DoorController>();
+            _doorController.ChangeStatusDoor();
         }
         else if (_hit.collider.CompareTag("Exit"))
         {
-            _currentExitDoor = _hit.collider.GetComponent<ExitDoorController>();
-            _currentExitDoor.NextLV();
+            _exitDoorController = _hit.collider.GetComponent<ExitDoorController>();
+            _exitDoorController.NextLV();
         }
         else
         {
-            _currentDoor = null;
+            _doorController = null;
+            _exitDoorController = null;
         }
     }
 
     #endregion
 
     #region TV
-    private void ChangeActiveTV()
+    private void ChangeActiveMechanism()
     {
-        if (_hit.collider.CompareTag("Mechanism") && !_tvIsStatus)
+        if (!_tvIsStatus)
         {
             _tips.text = "Нажмите 'E', чтобы включить";
             if (Input.GetKeyDown(KeyCode.E))
@@ -110,7 +118,7 @@ public class Press_E : MonoBehaviour
                 ledMesh.material = ledMaterialOn;
             }
         }
-        else if (_hit.collider.CompareTag("Mechanism") && _tvIsStatus)
+        else if (_tvIsStatus)
         {
             _tips.text = "Нажмите 'E', чтобы выключить";
             if (Input.GetKeyDown(KeyCode.E))
@@ -141,35 +149,20 @@ public class Press_E : MonoBehaviour
     #region Items
     private void CollectObject()
     {
-        if (_hit.collider.CompareTag("Item"))
-        {
-            _tips.text = "Нажмите 'E', чтобы подобрать";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                CollectWatch();
-            }
-        }
+        _pickupItem = _hit.collider.GetComponent<PickupItem>();
+        _pickupItem.SelectionItem();
     }
 
-    private void CollectWatch()
-    {
-        Destroy(_hit.collider.gameObject);
-        AudioSource.PlayClipAtPoint(soundEffect, transform.position);
-        _tips.text = "";
-    }
     #endregion
 
     #region Seat
     private void Seat()
     {
-        if (_hit.collider.CompareTag("Seat"))
+        _tips.text = "Нажмите 'E', чтобы сесть";
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            _tips.text = "Нажмите 'E', чтобы сесть";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                seatPerson.SetActive(true);
-                person.SetActive(false);
-            }
+            seatPerson.SetActive(true);
+            person.SetActive(false);
         }
     }
     #endregion

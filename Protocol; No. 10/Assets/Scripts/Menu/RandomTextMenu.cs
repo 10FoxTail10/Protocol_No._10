@@ -1,13 +1,14 @@
+using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine;
 
-public class Random_Text : MonoBehaviour
+public class RandomTextMenu : MonoBehaviour
 {
     [Header("Random text")]
-    [SerializeField] public List<Menu_Text> menuText;
+    [SerializeField] public List<MenuText> menuText;
 
-    private List<string> texts = new List<string>();
+    [Header("Private")]
+    [SerializeField] private List<string> texts = new List<string>();
 
     void Start()
     {

@@ -1,15 +1,16 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class DoorController : MonoBehaviour
 {
     [Header("Scripts")] // Другие скрипты
-    [SerializeField] private GlobalSet _globalSet; // Скрипт с глобальными переменными
-    [SerializeField] private Press_E _press_E; // Скрипт с глобальными переменными
+    [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
+    [SerializeField] private PressE _pressE;
 
     [Header("Door")]
     [SerializeField] public AudioClip soundDoor; // Звуковой эффект двери
+    [SerializeField] public Animator anim;
     [SerializeField] private bool _doorIsStatus; // Статус двери (открыто/закрыто)
 
     [Header("Private")]
@@ -18,12 +19,12 @@ public class DoorController : MonoBehaviour
 
     void Start()
     {
-        _tips = _globalSet.tips;
-        _hitDoor = _press_E._hit;
+        _tips = _globalSetting.tips;
     }
 
     public void ChangeStatusDoor()
     {
+        _hitDoor = _pressE._hit;
         if (!_doorIsStatus)
         {
             _tips.text = "Нажмите 'E', чтобы открыть";
@@ -46,13 +47,13 @@ public class DoorController : MonoBehaviour
 
     private void DoorOpen()
     {
-        Animator anim = _hitDoor.transform.GetComponent<Animator>();
+        anim = _hitDoor.transform.GetComponent<Animator>();
         anim.SetBool("Open", !anim.GetBool("Open"));
     }
 
     private void DoorClose()
     {
-        Animator anim = _hitDoor.transform.GetComponent<Animator>();
+        anim = _hitDoor.transform.GetComponent<Animator>();
         anim.SetBool("Close", !anim.GetBool("Close"));
     }
 

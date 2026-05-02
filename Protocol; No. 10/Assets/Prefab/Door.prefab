@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: 8904365738191586081}
   - component: {fileID: 3396812563092055311}
   - component: {fileID: 78927985502841628}
-  - component: {fileID: 1914094246949122835}
   - component: {fileID: 5376170157855809282}
   - component: {fileID: 2617434513624304800}
   m_Layer: 0
@@ -182,22 +181,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1914094246949122835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9038349102011102055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f811de046dfaa44954a2eb94f19680, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoorController
-  _globalSet: {fileID: 0}
-  _press_E: {fileID: 0}
-  soundDoor: {fileID: 8300000, guid: ab766ec5f8887aa478c30ec52bbd336c, type: 3}
-  _doorIsStatus: 0
 --- !u!65 &5376170157855809282
 BoxCollider:
   m_ObjectHideFlags: 0

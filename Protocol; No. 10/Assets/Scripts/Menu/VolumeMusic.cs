@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Volume_Music : MonoBehaviour
+public class VolumeMusic : MonoBehaviour
 {
     [Header("Glabal volume")]
     [SerializeField] public Toggle toggleGVolume;

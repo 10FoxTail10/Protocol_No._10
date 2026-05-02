@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ExitDoorController : MonoBehaviour
 {
     [Header("Scripts")] // Другие скрипты
-    [SerializeField] private GlobalSet _globalSet; // Скрипт с глобальными переменными
-    [SerializeField] private Press_E _press_E; // Скрипт с глобальными переменными
+    [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
+    [SerializeField] private PressE _pressE; // Скрипт с глобальными переменными
 
     [Header("Door")]
     [SerializeField] public AudioClip soundDoor; // Звуковой эффект двери
@@ -21,8 +21,8 @@ public class ExitDoorController : MonoBehaviour
 
     void Start()
     {
-        _tips = _globalSet.tips;
-        _hitDoor = _press_E._hit;
+        _tips = _globalSetting.tips;
+        _hitDoor = _pressE._hit;
         _sceneIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log("Номер сцены" + _sceneIndex);
     }
