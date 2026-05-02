@@ -1,17 +1,15 @@
 using UnityEngine;
 using TMPro;
 
+// И так, тут у нас прорсто перепись предмета (только одного, на который наложен скрипт, используется только со скриптом ItemData)
+
 public class PickupItem : MonoBehaviour
 {
-    [Header("Scripts")] // Другие скрипты
-    [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
-    [SerializeField] private PressE _pressE; // Скрипт с глобальными переменными
-    [SerializeField] private ItemData _itemData; // Скрипт с настройками предмета
-
     [Header("Item")]
     [SerializeField] public AudioClip soundSelection; // Звуковой эффект подбора предмета
 
     [Header("Private")]
+    private ItemData _itemData; // Скрипт с настройками предмета
     private TMP_Text _tips;
     private RaycastHit _hitItem;
 
@@ -19,18 +17,15 @@ public class PickupItem : MonoBehaviour
     {
         _tips = _globalSetting.tips;
         _hitItem = _pressE._hit;
-        _itemData = _hitItem.collider.GetComponent<ItemData>();
     }
 
     public void SelectionItem()
     {
-        if (true)
+        _itemData = _hitItem.collider.GetComponent<ItemData>();
+        _tips.text = "Нажмите 'E', чтобы подобрать";
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            _tips.text = "Нажмите 'E', чтобы подобрать";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                CollectWatch();
-            }
+            CollectWatch();
         }
     }
 
