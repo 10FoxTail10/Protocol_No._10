@@ -11,16 +11,34 @@ public class ItemController : MonoBehaviour
     [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
     [SerializeField] private PressE _pressE; // Скрипт с глобальными переменными
     [SerializeField] private PickupItem _pickupItem; // Скрипт с настройками предмета
+
+    [SerializeField] public bool isStack
+
     [SerializeField] public List<ItemData> inventory = new List<ItemData>(); // Список предметов в инвентаре
     [SerializeField] public event Action onInventoryChanged;
     [SerializeField] private string _savePath;
 
+    [Header("Private")]
+    private TMP_Text _tips;
+    private RaycastHit _hitItem;
+
     void Awake()
     {
-        // Путь к файлу сохранения. Он будет в скрытой папке пользователя.
-        _savePath = Path.Combine(Application.persistentDataPath, "saving.json");
+        _savePath = Path.Combine(Application.persistentDataPath, "saving.json"); // Путь к файлу сохранения. Он будет в скрытой папке пользователя.
+
         LoadInventory();
         Debug.Log("Инвентарь загружен. Путь: " + _savePath);
+    }
+
+    void Start()
+    {
+        _tips = _globalSetting.tips;
+
+    }
+
+    void Update()
+    {
+        _hitItem = _pressE._hit;
     }
 
     // Определяем, какие предметы могут стакаться.

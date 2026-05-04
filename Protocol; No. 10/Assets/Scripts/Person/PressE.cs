@@ -23,12 +23,14 @@ public class PressE : MonoBehaviour
     [SerializeField] public Material ledMaterialOff;
     [SerializeField] public MeshRenderer ledMesh;
     [SerializeField] private bool _tvIsStatus = true; // Статус телевизора (вкл/выкл)
-
+    [SerializeField] private MechanismController _mechanismController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+    
     [Header("Item")]
     [SerializeField] private PickupItem _pickupItem; // Скрипт с подбором предметов (ставится автоматом дальше по коду)
 
     [Header("Raycast")]
     [SerializeField] public RaycastHit _hit;
+    [SerializeField] private LayerMask _raycastMask;
     [SerializeField] private float _distance = 3f;
     public Ray ray;
 
@@ -60,12 +62,13 @@ public class PressE : MonoBehaviour
     #region Raycast
     public void Raycast()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out _hit, _distance))
+        if (Physics.Raycast(transform.position, transform.forward, out _hit, _distance, _raycastMask))
         {
             Door(); // Открытие закрытие двери
             if (_hit.collider.CompareTag("Mechanism"))
             {
-                ChangeActiveMechanism(); // Смена активности TV
+                _mechanismController = _hit.collider.GetComponent<MechanismController>();
+                _mechanismController.ChangeActiveMechanism(); // Смена активности TV
             }
             else if (_hit.collider.CompareTag("Item"))
             {
@@ -106,39 +109,17 @@ public class PressE : MonoBehaviour
     #endregion
 
     #region TV
-    private void ChangeActiveMechanism()
+    public void TurnOnTV()
     {
-        if (!_tvIsStatus)
-        {
-            _tips.text = "Нажмите 'E', чтобы включить";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                TurnOnTV();
-                _tvIsStatus = true;
-                ledMesh.material = ledMaterialOn;
-            }
-        }
-        else if (_tvIsStatus)
-        {
-            _tips.text = "Нажмите 'E', чтобы выключить";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                TurnOffTV();
-                _tvIsStatus = false;
-                ledMesh.material = ledMaterialOff;
-            }
-        }
-    }
-
-    private void TurnOnTV()
-    {
+        ledMesh.material = ledMaterialOn;
         audioTV.volume = _startVolume;
         videoTV.enabled = true;
         screenOff.SetActive(false);
     }
 
-    private void TurnOffTV()
+    public void TurnOffTV()
     {
+        ledMesh.material = ledMaterialOff;
         audioTV.volume = 0;
         videoTV.enabled = false;
         screenOff.SetActive(true);

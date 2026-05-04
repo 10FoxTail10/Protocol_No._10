@@ -22,13 +22,13 @@ public class ExitDoorController : MonoBehaviour
     void Start()
     {
         _tips = _globalSetting.tips;
-        _hitDoor = _pressE._hit;
         _sceneIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log("Номер сцены" + _sceneIndex);
     }
 
     public void NextLV()
     {
+        _hitDoor = _pressE._hit;
         _tips.text = "Нажмите 'E', чтобы выйти";
         if (Input.GetKeyDown(KeyCode.E))
         {

@@ -184,6 +184,10 @@ PrefabInstance:
       value: Sofa
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6d37c1f4eef72c04d8abd6bb92de205f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d37c1f4eef72c04d8abd6bb92de205f, type: 3}
       propertyPath: m_TagString
       value: Seat
       objectReference: {fileID: 0}
@@ -2443,7 +2447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1807970279642858887, guid: de00c08534378dd48a1c287997894095, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: de00c08534378dd48a1c287997894095, type: 3}
       propertyPath: m_Name
@@ -3760,7 +3764,7 @@ GameObject:
   - component: {fileID: 801417997}
   - component: {fileID: 801417999}
   - component: {fileID: 801417998}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Frame_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5360,7 +5364,7 @@ GameObject:
   - component: {fileID: 1064132439}
   - component: {fileID: 1064132438}
   - component: {fileID: 1064132441}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door
   m_TagString: Exit
   m_Icon: {fileID: 0}
@@ -5890,6 +5894,16 @@ MonoBehaviour:
   _globalSetting: {fileID: 280508919}
   _pressE: {fileID: 7141904071310547177}
   soundSelection: {fileID: 8300000, guid: ab766ec5f8887aa478c30ec52bbd336c, type: 3}
+  _itemData:
+    id: Pocket_Watch
+    name: "\u0427\u0430\u0441\u044B \u0431\u0430\u0442\u0438"
+    description: "\u041D\u0443 \u0430 \u0447\u0442\u043E \u0441\u043A\u0430\u0437\u0430\u0442\u044C,
+      \u0431\u0430\u0442\u044F \u043F\u043E\u0434\u0430\u0440\u0438\u043B"
+    isStackable: 0
+    x: 0
+    y: 0
+    quantity: 1
+    stats: []
 --- !u!1 &1214686185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6552,7 +6566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1304086430}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Exit_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8321,12 +8335,20 @@ PrefabInstance:
       value: -6.685
       objectReference: {fileID: 0}
     - target: {fileID: -5757395120581710966, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5757395120581710966, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5757395120581710966, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
       propertyPath: m_TagString
       value: Mechanism
+      objectReference: {fileID: 0}
+    - target: {fileID: -3660503583112023167, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -3660503583112023167, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
       propertyPath: m_IsActive
@@ -8341,6 +8363,10 @@ PrefabInstance:
       value: TV
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
@@ -8353,8 +8379,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ac05f8b6325ae404991e0b21cf87fd59, type: 2}
     - target: {fileID: 2932423650710088133, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932423650710088133, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979796359008473422, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3627217980279046613, guid: 48fb59b543cf49340bd15cca6570a207, type: 3}
       propertyPath: m_Materials.Array.size
@@ -8944,8 +8978,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7946244652993024178, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7946244652993024178, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: -3959177296481788914, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -3959177296481788914, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
       propertyPath: m_TagString
@@ -8956,12 +8998,24 @@ PrefabInstance:
       value: Pocket_Watch
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
       propertyPath: m_TagString
       value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 3396913584297481876, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396913584297481876, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638104345217537351, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7638104345217537351, guid: d9247df4b3697e447b054d34cbd9353d, type: 3}
       propertyPath: m_TagString
@@ -9143,6 +9197,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 219336524}
     m_Modifications:
+    - target: {fileID: 1880810549891853181, guid: a3f0e59dfa42eb045a5c4530af9773da, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1914094246949122835, guid: a3f0e59dfa42eb045a5c4530af9773da, type: 3}
       propertyPath: _pressE
       value: 
@@ -9191,9 +9249,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 9038349102011102055, guid: a3f0e59dfa42eb045a5c4530af9773da, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9130085002866086132, guid: a3f0e59dfa42eb045a5c4530af9773da, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130085002866086132, guid: a3f0e59dfa42eb045a5c4530af9773da, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10202,9 +10268,25 @@ PrefabInstance:
       propertyPath: _globalSetting
       value: 
       objectReference: {fileID: 280508919}
+    - target: {fileID: 946317100266307018, guid: b3ebc57e33f068c4594a08ebeac827f1, type: 3}
+      propertyPath: _raycastMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 4517614397561150566, guid: b3ebc57e33f068c4594a08ebeac827f1, type: 3}
       propertyPath: m_Name
       value: Person
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517614397561150566, guid: b3ebc57e33f068c4594a08ebeac827f1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022779303569899431, guid: b3ebc57e33f068c4594a08ebeac827f1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658007392773986896, guid: b3ebc57e33f068c4594a08ebeac827f1, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7658007392773986896, guid: b3ebc57e33f068c4594a08ebeac827f1, type: 3}
       propertyPath: m_TagString
