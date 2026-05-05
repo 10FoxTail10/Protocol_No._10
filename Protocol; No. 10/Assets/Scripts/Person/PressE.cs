@@ -28,6 +28,9 @@ public class PressE : MonoBehaviour
     
     [Header("Item")]
     [SerializeField] private PickupItem _pickupItem; // Скрипт с подбором предметов (ставится автоматом дальше по коду)
+    
+    [Header("Place")]
+    [SerializeField] private PlaceItem _placeItem; // Скрипт с установкой предмета, если тот есть в инвенторе (ставится автоматом дальше по коду)
 
     [Header("Raycast")]
     [SerializeField] public RaycastHit _hit;
@@ -85,6 +88,11 @@ public class PressE : MonoBehaviour
             {
                 Seat(); // Сесть
             }
+
+            if (_hit.collider.CompareTag("Place"))
+            {
+                PlaceObject(); // поставить объект
+            }
         }
         else
         {
@@ -139,6 +147,15 @@ public class PressE : MonoBehaviour
     {
         _pickupItem = _hit.collider.GetComponent<PickupItem>();
         _pickupItem.SelectionItem();
+    }
+
+    #endregion
+
+    #region Place
+    private void PlaceObject()
+    {
+        _placeItem = _hit.collider.GetComponent<PlaceItem>();
+        _placeItem.PlaceItemWord();
     }
 
     #endregion

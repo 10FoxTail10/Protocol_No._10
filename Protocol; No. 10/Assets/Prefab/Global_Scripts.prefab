@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3547872342781113536
+--- !u!1 &3065829368000369584
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8802535618234180850}
-  - component: {fileID: 8141176283451725552}
+  - component: {fileID: 1732390813486568766}
+  - component: {fileID: 6944070568584119820}
+  - component: {fileID: 4825219074085851115}
   m_Layer: 0
   m_Name: Global_Scripts
   m_TagString: Untagged
@@ -17,28 +18,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8802535618234180850
+--- !u!4 &1732390813486568766
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3547872342781113536}
+  m_GameObject: {fileID: 3065829368000369584}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.49936, y: 3.50538, z: -6.56781}
+  m_LocalPosition: {x: 3.26952, y: 3.58691, z: 2.71205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8141176283451725552
+--- !u!114 &6944070568584119820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3547872342781113536}
+  m_GameObject: {fileID: 3065829368000369584}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f9c1e84e5dbd924286bd04e663e590b, type: 3}
@@ -49,4 +50,20 @@ MonoBehaviour:
   effectVolume: 1
   sensetivity: 0
   isInRange: 0
-  assss: 15
+  tips: {fileID: 0}
+--- !u!114 &4825219074085851115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065829368000369584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3eba0acce8387439ff54d3bd61e1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JSONControler
+  item:
+    NameItem: Watch
+    Level: 1
+    Time: 10
