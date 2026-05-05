@@ -8,16 +8,19 @@ using System.Collections.Generic;
 [System.Serializable]
 public class ItemData
 {
-    [Header("Item")]
+    [Header("Item ID")]
     [SerializeField] public string id; // Уникальный ID типа (например: "potion_health")
-    [SerializeField] public string name;
-    [SerializeField] public string description; // Описание предмета
-    [SerializeField] public bool isStackable; // Можно ли стакать предметы
-    [SerializeField] public int x, y; // Позиция в инвентаре
-    [SerializeField] public int quantity = 1; // Количество предметов в этом слоте (Если пули в коробке или что-то подобное, иначе 1)
-    // Статы оставляем для оружия и брони
-    [SerializeField] public List<StatPair> stats = new List<StatPair>();
 
+    [Header("Item")]
+    [SerializeField] public string name;
+    [SerializeField] public string description; // Описание
+    [SerializeField] public bool isStackble; // Можно ли стакать предметы
+    [Range(1, 15)] public int quantity = 1; // Количество предметов в этом слоте (Если пули в коробке или что-то подобное, иначе 1)
+    [SerializeField] public List<StatPair> stats = new List<StatPair>(); // Статы для оружия или особых расходников
+
+    [Header("Inventory position")]
+    [SerializeField] public int x, y; // Позиция в инвентаре
+    
 }
 
 [System.Serializable]

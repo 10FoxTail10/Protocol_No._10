@@ -11,8 +11,8 @@ public class PressE : MonoBehaviour
     [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
 
     [Header("Door")]
-    [SerializeField] private DoorController _doorController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
-    [SerializeField] private ExitDoorController _exitDoorController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+    [HideInInspector] private DoorController _doorController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
+    [HideInInspector] private ExitDoorController _exitDoorController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
 
     [Header("TV")]
     [SerializeField] public AudioSource audioTV; // Аудио телевизора
@@ -22,7 +22,8 @@ public class PressE : MonoBehaviour
     [SerializeField] public Material ledMaterialOn;
     [SerializeField] public Material ledMaterialOff;
     [SerializeField] public MeshRenderer ledMesh;
-    [SerializeField] private bool _tvIsStatus = true; // Статус телевизора (вкл/выкл)
+
+    [Header("MechanismController")]
     [SerializeField] private MechanismController _mechanismController; // Скрипт с взаимодействием двери (ставится автоматом дальше по коду)
     
     [Header("Item")]
@@ -70,11 +71,17 @@ public class PressE : MonoBehaviour
                 _mechanismController = _hit.collider.GetComponent<MechanismController>();
                 _mechanismController.ChangeActiveMechanism(); // Смена активности TV
             }
-            else if (_hit.collider.CompareTag("Item"))
+            else
+            {
+                _mechanismController = null;
+            }
+
+            if (_hit.collider.CompareTag("Item"))
             {
                 CollectObject(); // Сбор предметов 
             }
-            else if (_hit.collider.CompareTag("Seat"))
+
+            if (_hit.collider.CompareTag("Seat"))
             {
                 Seat(); // Сесть
             }

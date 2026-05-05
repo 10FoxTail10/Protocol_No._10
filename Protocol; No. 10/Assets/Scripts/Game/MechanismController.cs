@@ -12,8 +12,8 @@ public class MechanismController : MonoBehaviour
     [SerializeField] private bool _lockIsStatus; // Статус блокировки (Можно ли повторно использовать механизм)
 
     [Header("Private")]
-    private TMP_Text _tips;
-    private RaycastHit _hitMechanism;
+    [HideInInspector] private TMP_Text _tips;
+    [HideInInspector] private RaycastHit _hitMechanism;
 
     void Start()
     {
@@ -30,6 +30,10 @@ public class MechanismController : MonoBehaviour
             {
                 _pressE.TurnOnTV();
                 _mechanismIsStatus = true;
+            }
+            if (Input.GetKeyDown(KeyCode.E) && _lockIsStatus)
+            {
+                _tips.text = "";
             }
         }
         else if (_mechanismIsStatus && !_lockIsStatus)

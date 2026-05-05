@@ -23,7 +23,6 @@ public class ExitDoorController : MonoBehaviour
     {
         _tips = _globalSetting.tips;
         _sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("Номер сцены" + _sceneIndex);
     }
 
     public void NextLV()
