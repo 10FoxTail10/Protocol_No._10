@@ -69,30 +69,26 @@ public class PickupItem : MonoBehaviour
 
         Destroy(_hitItem.collider.gameObject);
 
-        //// --- ЛОГИКА ЛИМИТА ---
-        //// Находим текущий стак этого зелья в инвентаре (если он есть)
-        //ItemData currentStack = itemController.inventory.Find(i => i.id == itemId);
-        //int currentAmount = currentStack != null ? currentStack.quantity : 0;
+        // --- ЛОГИКА ЛИМИТА ---
+        // Находим текущий стак этого зелья в инвентаре (если он есть)
+        ItemData currentStack = itemController.inventory.Find(i => i.id == itemID);
+        int currentAmount = currentStack != null ? currentStack.quantity : 0;
 
-        //// Считаем свободное место до лимита (8)
-        //int freeSpace = 8 - currentAmount;
+        // Считаем свободное место до лимита (8)
+        int freeSpace = 8 - currentAmount;
 
-        //if (freeSpace <= 0)
-        //{
-        //    Debug.Log("Инвентарь полон! Места для зелий нет.");
-        //    return; // Не подбираем ничего, если места нет совсем
-        //}
+        if (freeSpace <= 0)
+        {
+            Debug.Log("Инвентарь полон! Места для зелий нет.");
+            return; // Не подбираем ничего, если места нет совсем
+        }
 
-        //// Сколько мы МОЖЕМ забрать, чтобы не превысить лимит?
-        //int quantityToAdd = Mathf.Min(dropQuantity, freeSpace);
+        // Сколько мы МОЖЕМ забрать, чтобы не превысить лимит?
+        int quantityToAdd = Mathf.Min(1, freeSpace);
 
-        //if (quantityToAdd < dropQuantity)
-        //{
-        //    Debug.Log($"Мешок полон! Подобрано только {quantityToAdd} из {dropQuantity} шт.");
-        //}
-
-
-
+        if (quantityToAdd < 1)
+        {
+            Debug.Log($"Мешок полон! Подобрано только {quantityToAdd} из {1} шт.");
+        }
     }
-
 }
