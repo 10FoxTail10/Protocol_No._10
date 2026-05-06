@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 2604699084167753963}
   - component: {fileID: 1639576487611541542}
   - component: {fileID: 7243178017785514388}
-  m_Layer: 0
+  - component: {fileID: 3587760662791848995}
+  m_Layer: 9
   m_Name: Person
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -31,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4517614397561150566}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.94522667, z: -0, w: 0.32641467}
+  m_LocalRotation: {x: -0, y: 0.96970123, z: -0, w: -0.24429397}
   m_LocalPosition: {x: 4.79, y: -2.25, z: 4.85}
   m_LocalScale: {x: 0.45355392, y: 0.80367243, z: 0.27753887}
   m_ConstrainProportionsScale: 0
@@ -39,7 +40,7 @@ Transform:
   - {fileID: 2223684394409655754}
   - {fileID: 57572008900630265}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 141.897, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 208.28, z: 0}
 --- !u!33 &1654236684275320939
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -219,6 +220,23 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3587760662791848995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517614397561150566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c3f165839b19747ba2d32b4b0cb974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemController
+  _globalSetting: {fileID: 0}
+  _pressE: {fileID: 946317100266307018}
+  _pickupItem: {fileID: 0}
+  inventory: []
+  _savePath: 
 --- !u!1 &5022779303569899431
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57572008900630265}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,9 +281,9 @@ GameObject:
   - component: {fileID: 8605471654680057450}
   - component: {fileID: 3134577399974242507}
   - component: {fileID: 946317100266307018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,8 +419,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PressE
   _globalSetting: {fileID: 0}
-  _doorController: {fileID: 0}
-  _exitDoorController: {fileID: 0}
   audioTV: {fileID: 0}
   videoTV: {fileID: 0}
   screenOff: {fileID: 0}
@@ -410,8 +426,11 @@ MonoBehaviour:
   ledMaterialOn: {fileID: 2100000, guid: ac05f8b6325ae404991e0b21cf87fd59, type: 2}
   ledMaterialOff: {fileID: 2100000, guid: 940864f5a7dd3004696c5e62c2770326, type: 2}
   ledMesh: {fileID: 0}
-  _tvIsStatus: 1
+  _mechanismController: {fileID: 0}
   _pickupItem: {fileID: 0}
+  _raycastMask:
+    serializedVersion: 2
+    m_Bits: 512
   _distance: 4
   person: {fileID: 4517614397561150566}
   seatPerson: {fileID: 0}

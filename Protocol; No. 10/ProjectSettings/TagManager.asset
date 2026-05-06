@@ -13,6 +13,7 @@ TagManager:
   - Mechanism
   - Seat
   - Exit
+  - Place
   layers:
   - Default
   - TransparentFX
