@@ -1,16 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq; // Нужно для OrderBy
+using TMPro;
 using UnityEngine;
 
 public class TimeBack : MonoBehaviour
 {
+    [Header("Scripts")] // Другие скрипты
+    [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
+    [SerializeField] private PressE _pressE; // Скрипт с глобальными переменными
+    [SerializeField] private ItemController _itemController; // Скрипт с глобальными переменными
+
     public GameObject[] objectsToToggle;  // Массив всех переключаемых объектов
     int activeIndex = 0;                   // Индекс текущего активного объекта
-    float activationDuration = 10f;        // Длительность активности второго объекта
-    float cooldownPeriod = 5f;             // Период восстановления
+    public float activationDuration = 1f;        // Длительность активности второго объекта
+    float cooldownPeriod = 1f;             // Период восстановления
     float nextAvailableTime = 0f;          // Время следующего разрешения активации
+
+    private bool _hasAppliedCristal = false;
+    private bool _hasAppliedGear = false;
+
 
     void Start()
     {
-        // Изначальная активация объекта под индексом 0
         objectsToToggle[activeIndex].SetActive(true);
     }
 
@@ -21,6 +34,10 @@ public class TimeBack : MonoBehaviour
         {
             StartActivationSequence();
         }
+
+
+        UseItemStat("Gear_Stabilizer", "Time_Back_Gear");
+        UseItemStat("Cristal_Stabilizer", "Time_Back_Cristal");
     }
 
     void StartActivationSequence()
@@ -64,4 +81,53 @@ public class TimeBack : MonoBehaviour
             obj.SetActive(false);
         }
     }
+
+    void UseItemStat(string itemId, string statKey)
+    {
+        int statValue = _itemController.GetItemStat(itemId, statKey);
+
+        if (statValue != 0)
+        {
+            Debug.Log($"У предмета {itemId} стат {statKey} = {statValue}");
+            PlayTime(statKey, statValue);
+        }
+        else
+        {
+            Debug.Log($"Предмет {itemId} не найден или у него нет стата {statKey}");
+        }
+    }
+
+    public void PlayTime(string statKey, float statValue)
+    {
+        switch (statKey)
+        {
+            case "Time_Back_Cristal":
+                ApplyTimeCristal(statValue);
+                break;
+            case "Time_Back_Gear":
+                ApplyTimeGear(statValue);
+                break;
+        }
+    }
+
+    private void ApplyTimeCristal(float value)
+    {
+        if (_hasAppliedCristal)
+            return;
+        activationDuration += value;
+        Debug.Log(value);
+        Debug.Log(activationDuration);
+        _hasAppliedCristal = true;
+    }
+
+    private void ApplyTimeGear(float value)
+    {
+        if (_hasAppliedGear)
+            return;
+        activationDuration += value;
+        Debug.Log(value);
+        Debug.Log(activationDuration);
+        _hasAppliedGear = true;
+    }
+
 }

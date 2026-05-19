@@ -14,24 +14,27 @@ public class MenuExit : MonoBehaviour
 
     void Update()
     {
-        MenuVisible();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            MenuVisible();
+        }
     }
 
     public void MenuVisible()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && _isActive)
+        if (_isActive)
         {
             menuIsVis.SetActive(false);
-            menuIsNotVis.SetActive(true);
+            menuIsNotVis.SetActive(false);
             pause.SetActive(true);
             _isActive = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else
         {
             menuIsVis.SetActive(true);
-            menuIsNotVis.SetActive(false);
+            menuIsNotVis.SetActive(true);
             pause.SetActive(false);
             _isActive = true;
             Cursor.visible = true;

@@ -10,7 +10,6 @@ public class ItemController : MonoBehaviour
     [Header("Scripts")] // Другие скрипты
     [SerializeField] private GlobalSetting _globalSetting; // Скрипт с глобальными переменными
     [SerializeField] private PressE _pressE; // Скрипт с глобальными переменными
-    [SerializeField] private PickupItem _pickupItem; // Скрипт с настройками предмета
 
     [SerializeField] public List<ItemData> inventory = new List<ItemData>(); // Список предметов в инвентаре
     [SerializeField] public event Action onInventoryChanged;
@@ -36,15 +35,7 @@ public class ItemController : MonoBehaviour
     void Update()
     {
         _hitItem = _pressE._hit;
-
-        // Очистка всего инвентаря (Черная дыра Тестовая фигня)
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            inventory.Clear();
-            onInventoryChanged?.Invoke();
-            SaveInventory();
-            Debug.Log("Инвентарь очищен!");
-        }
+        RemoveItem();
     }
 
     private bool IsStackableItem(bool itemStack)
@@ -101,6 +92,18 @@ public class ItemController : MonoBehaviour
         SaveInventory();
     }
 
+    public void RemoveItem()
+    {
+        // Очистка всего инвентаря (Черная дыра Тестовая фигня)
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            inventory.Clear();
+            onInventoryChanged?.Invoke();
+            SaveInventory();
+            Debug.Log("Инвентарь очищен!");
+        }
+    }
+
     //// Удаление предмета по ID
     //public void RemoveItem(string itemId)
     //{
@@ -109,6 +112,23 @@ public class ItemController : MonoBehaviour
     //    SaveInventory();
     //    Debug.Log("Удален предмет с ID: " + itemId);
     //}
+
+    public int GetItemStat(string itemId, string statKey, int defaultValue = 0)
+    {
+        // Находим предмет в инвентаре
+        ItemData item = inventory.FirstOrDefault(i => i.id == itemId);
+
+        if (item == null)
+            return defaultValue; // Предмет не найден
+
+        // Ищем стат с нужным ключом
+        StatPair stat = item.stats.FirstOrDefault(s => s.key == statKey);
+
+        if (stat == null)
+            return defaultValue; // Стат не найден
+
+        return stat.value; // Возвращаем значение стата
+    }
 
 
     // Сохранение в JSON

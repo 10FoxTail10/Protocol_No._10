@@ -12,6 +12,8 @@ public class PlaceItem : MonoBehaviour
     [SerializeField] private string _itemID;
     [SerializeField] public GameObject obj;
     [SerializeField] public bool isActive;
+    [SerializeField] public Collider collider;
+    [SerializeField] public Collider triger_col;
 
     [Header("Private")]
     private TMP_Text _tips;
@@ -20,6 +22,8 @@ public class PlaceItem : MonoBehaviour
     void Start()
     {
         _tips = _globalSetting.tips;
+        collider.isTrigger = true;
+        triger_col.enabled = true;
     }
 
     public void PlaceItemWord()
@@ -42,6 +46,8 @@ public class PlaceItem : MonoBehaviour
 
     private void Place()
     {
+        collider.isTrigger = false;
+        triger_col.enabled = false;
         obj.SetActive(true);
     }
 
